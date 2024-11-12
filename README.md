@@ -2,6 +2,8 @@
 
 [Documentation](https://sheita.gitbook.io/sysmonitoring)
 
+![Monitoring Dashboard](sysmonitoring.png)
+
 **sysmonitoring** is a lightweight open-source and easy-to-use npm module for real-time system monitoring. It provides detailed insights into system performance, such as CPU, RAM, and program latency, in an intuitive and modern dashboard interface.
 
 ## Features
