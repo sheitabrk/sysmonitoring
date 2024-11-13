@@ -14,11 +14,10 @@
 - Live charts and graphs for easy data visualization
 - Command-line style console for executing custom commands
 
-- V1.1.0
-    - New API Route : /monitoring/api/runCommand
-    - New Function **runCommand()**
+- V1.1.1
     - Light/Dark mode 🌞/🌙
     - Redirect API calls if they're incorrect
+    - Minor fix
 
 ## Installation
 

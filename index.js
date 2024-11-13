@@ -41,19 +41,6 @@ class MonitoringDashboard {
             res.json({ ping });
         });
 
-        this.app.post('/api/runCommand', (req, res) => {
-            const command = req.body.command;
-            const args = req.body.args || [];
-    
-            const commands = require('./public/script');
-            if (commands[command]) {
-                const output = commands[command](args);
-                res.json({ success: true, output });
-            } else {
-                res.status(404).json({ success: false, message: 'Command not found' });
-            }
-        });
-
 
         this.app.get('/monitoring/api/cpu', async (req, res) => {
             const tryapi = "Try /api/cpu"
@@ -67,11 +54,6 @@ class MonitoringDashboard {
 
         this.app.get('/monitoring/api/ping', async (req, res) => {
             const tryapi = "Try /api/ping"
-            res.json({ tryapi });
-        });
-
-        this.app.post('/monitoring/api/runCommand', (req, res) => {
-            const tryapi = "Try /api/runCommand"
             res.json({ tryapi });
         });
     }
@@ -121,17 +103,6 @@ class MonitoringDashboard {
         }
 
         this.io.close();
-    }
-
-    runCommand(command, args = []) {
-        const commands = require('./public/script'); 
-
-        if (commands[command]) {
-            const output = commands[command](args);
-            return output;
-        } else {
-            return `Command '${command}' not found.`;
-        }
     }
 }
 

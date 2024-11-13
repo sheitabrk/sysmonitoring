@@ -103,21 +103,4 @@ function handleCommand(input) {
     } else {
         logToConsole(`Command not recognized: ${command}`);
     }
-
-    fetch('/monitoring/api/runCommand', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ command, args })
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            logToConsole(data.output);
-        } else {
-            logToConsole(`Error: ${data.message}`);
-        }
-    })
-    .catch(error => logToConsole(`Request error: ${error}`));
 }
