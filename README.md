@@ -14,6 +14,12 @@
 - Live charts and graphs for easy data visualization
 - Command-line style console for executing custom commands
 
+- V1.0.2
+    - New API Route : /monitoring/api/runCommand
+    - New Function **runCommand()**
+    - Light/Dark mode 🌞/🌙
+    - Redirect API calls if they're incorrect
+
 ## Installation
 
 To install **sysmonitoring**, run the following command in your project directory:

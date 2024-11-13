@@ -26,19 +26,53 @@ class MonitoringDashboard {
             res.sendFile(path.join(__dirname, 'public', 'index.html'));
         });
 
-        this.app.get('/api/cpu', async (req, res) => {
+        this.app.get('/monitoring/api/cpu', async (req, res) => {
             const cpuLoad = await this.getCpuLoad();
             res.json({ cpuLoad });
         });
 
-        this.app.get('/api/memory', async (req, res) => {
+        this.app.get('/monitoring/api/memory', async (req, res) => {
             const memoryUsage = await this.getMemoryUsage();
             res.json({ memoryUsage });
         });
 
-        this.app.get('/api/ping', async (req, res) => {
+        this.app.get('/monitoring/api/ping', async (req, res) => {
             const ping = await this.getPing();
             res.json({ ping });
+        });
+
+        this.app.post('/monitoring/api/runCommand', (req, res) => {
+            const command = req.body.command;
+            const args = req.body.args || [];
+    
+            const commands = require('./public/script');
+            if (commands[command]) {
+                const output = commands[command](args);
+                res.json({ success: true, output });
+            } else {
+                res.status(404).json({ success: false, message: 'Command not found' });
+            }
+        });
+
+
+        this.app.get('/api/cpu', async (req, res) => {
+            const tryapi = "Try /monitoring/api/cpu"
+            res.json({ tryapi });
+        });
+
+        this.app.get('/api/memory', async (req, res) => {
+            const tryapi = "Try /monitoring/api/memory"
+            res.json({ tryapi });
+        });
+
+        this.app.get('/api/ping', async (req, res) => {
+            const tryapi = "Try /monitoring/api/ping"
+            res.json({ tryapi });
+        });
+
+        this.app.post('/api/runCommand', (req, res) => {
+            const tryapi = "Try /monitoring/api/runCommand"
+            res.json({ tryapi });
         });
     }
 
@@ -87,6 +121,17 @@ class MonitoringDashboard {
         }
 
         this.io.close();
+    }
+
+    runCommand(command, args = []) {
+        const commands = require('./public/script'); 
+
+        if (commands[command]) {
+            const output = commands[command](args);
+            return output;
+        } else {
+            return `Command '${command}' not found.`;
+        }
     }
 }
 

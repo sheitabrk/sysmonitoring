@@ -10,6 +10,9 @@
 <body>
     <div class="dashboard">
         <h1>System Monitoring Dashboard</h1>
+        <button id="theme-toggle" aria-label="Toggle Theme">
+            <span id="theme-icon">🌙</span>
+        </button>
         <div class="chart-container">
             <div class="chart-box">
                 <canvas class="chart" id="cpu-chart"></canvas>
@@ -32,5 +35,6 @@
     <script src="/socket.io/socket.io.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="script.js"></script>
+    <script src="dashboard.js"></script>
 </body>
 </html>

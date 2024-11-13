@@ -92,3 +92,54 @@ h1 {
     border-radius: 4px;
     margin-top: 5px;
 }
+
+#theme-toggle {
+    background-color: transparent;
+    border: none;
+    color: #e7dfdd;
+    font-size: 1.5em;
+    cursor: pointer;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+#theme-toggle:focus {
+    outline: none;
+}
+
+.light-mode body {
+    background-color: #ffffff !important;
+    color: #0e0b16;
+}
+
+body.light-mode {
+    background-color: #ffffff !important; 
+}
+
+.light-mode .dashboard h1 {
+    color: #0e0b16;
+}
+
+.light-mode .chart {
+    background-color: #f1f1f1;
+}
+
+.light-mode .chart-value {
+    background-color: #ffffff;
+    color: #333;
+}
+
+.light-mode .console-container {
+    background-color: #f1f1f1;
+    color: #333;
+}
+
+.light-mode .console-input {
+    background-color: #dbdbdb;
+    color: #333;
+}
+
+.light-mode .console-output {
+    color: #1e1b26;
+}

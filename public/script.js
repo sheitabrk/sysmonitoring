@@ -9,7 +9,7 @@ function logToConsole(message) {
     const messageElement = document.createElement('div');
     messageElement.textContent = message;
     consoleOutput.appendChild(messageElement);
-    consoleOutput.scrollTop = consoleOutput.scrollHeight; // Scroll vers le bas
+    consoleOutput.scrollTop = consoleOutput.scrollHeight;
 }
 
 const cpuChart = new Chart(document.getElementById('cpu-chart').getContext('2d'), {
@@ -103,4 +103,21 @@ function handleCommand(input) {
     } else {
         logToConsole(`Command not recognized: ${command}`);
     }
+
+    fetch('/monitoring/api/runCommand', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ command, args })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            logToConsole(data.output);
+        } else {
+            logToConsole(`Error: ${data.message}`);
+        }
+    })
+    .catch(error => logToConsole(`Request error: ${error}`));
 }

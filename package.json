@@ -1,16 +1,25 @@
 {
   "name": "sysmonitoring",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "test": "node test.js"
   },
   "dependencies": {
     "express": "^4.17.1",
     "socket.io": "^4.0.0",
     "systeminformation": "^5.9.5"
   },
-  "keywords": ["monitoring", "sysmonitoring", "dashboard", "system", "CPU", "RAM", "real-time"],
+  "keywords": [
+    "monitoring",
+    "sysmonitoring",
+    "dashboard",
+    "system",
+    "CPU",
+    "RAM",
+    "real-time"
+  ],
   "author": "Sheita",
   "license": "ISC"
 }
