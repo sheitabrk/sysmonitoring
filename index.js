@@ -26,22 +26,22 @@ class MonitoringDashboard {
             res.sendFile(path.join(__dirname, 'public', 'index.html'));
         });
 
-        this.app.get('/monitoring/api/cpu', async (req, res) => {
+        this.app.get('/api/cpu', async (req, res) => {
             const cpuLoad = await this.getCpuLoad();
             res.json({ cpuLoad });
         });
 
-        this.app.get('/monitoring/api/memory', async (req, res) => {
+        this.app.get('/api/memory', async (req, res) => {
             const memoryUsage = await this.getMemoryUsage();
             res.json({ memoryUsage });
         });
 
-        this.app.get('/monitoring/api/ping', async (req, res) => {
+        this.app.get('/api/ping', async (req, res) => {
             const ping = await this.getPing();
             res.json({ ping });
         });
 
-        this.app.post('/monitoring/api/runCommand', (req, res) => {
+        this.app.post('/api/runCommand', (req, res) => {
             const command = req.body.command;
             const args = req.body.args || [];
     
@@ -55,23 +55,23 @@ class MonitoringDashboard {
         });
 
 
-        this.app.get('/api/cpu', async (req, res) => {
-            const tryapi = "Try /monitoring/api/cpu"
+        this.app.get('/monitoring/api/cpu', async (req, res) => {
+            const tryapi = "Try /api/cpu"
             res.json({ tryapi });
         });
 
-        this.app.get('/api/memory', async (req, res) => {
-            const tryapi = "Try /monitoring/api/memory"
+        this.app.get('/monitoring/api/memory', async (req, res) => {
+            const tryapi = "Try /api/memory"
             res.json({ tryapi });
         });
 
-        this.app.get('/api/ping', async (req, res) => {
-            const tryapi = "Try /monitoring/api/ping"
+        this.app.get('/monitoring/api/ping', async (req, res) => {
+            const tryapi = "Try /api/ping"
             res.json({ tryapi });
         });
 
-        this.app.post('/api/runCommand', (req, res) => {
-            const tryapi = "Try /monitoring/api/runCommand"
+        this.app.post('/monitoring/api/runCommand', (req, res) => {
+            const tryapi = "Try /api/runCommand"
             res.json({ tryapi });
         });
     }
