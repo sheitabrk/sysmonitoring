@@ -80,18 +80,49 @@ const commands = {
         }
     },
     time: () => logToConsole(new Date().toLocaleTimeString()),
+    date: () => logToConsole(new Date().toLocaleDateString()),
+
     help: () => {
         logToConsole('Available commands:');
-        logToConsole('clear - Clear the console');
-        logToConsole('echo [message] - Print a message');
-        logToConsole('time - Print the current time');
-        logToConsole('help - Print this help message');
-        logToConsole('stats - Print the current stats');
+        for (let cmd in commands) {
+            logToConsole(`- ${cmd}`);
+        }
     },
+
     stats: () => {
-        logToConsole(cpuValueDisplay.textContent);
-        logToConsole(memoryValueDisplay.textContent);
-        logToConsole(pingValueDisplay.textContent);
+        logToConsole(`CPU: ${cpuValueDisplay.textContent}`);
+        logToConsole(`Memory: ${memoryValueDisplay.textContent}`);
+        logToConsole(`Ping: ${pingValueDisplay.textContent}`);
+    },
+
+    uptime: async () => {
+        const data = await fetch('/api/uptime').then(res => res.json());
+        logToConsole(`Uptime: ${data.uptime}`);
+    },
+
+    cputemp: async () => {
+        const data = await fetch('/api/cputemp').then(res => res.json());
+        logToConsole(`CPU Temp: ${data.temp} °C`);
+    },
+
+    hostname: async () => {
+        const data = await fetch('/api/hostname').then(res => res.json());
+        logToConsole(`Hostname: ${data.hostname}`);
+    },
+
+    platform: async () => {
+        const data = await fetch('/api/platform').then(res => res.json());
+        logToConsole(`Platform: ${data.platform}`);
+    },
+
+    whoami: async () => {
+        const data = await fetch('/api/user').then(res => res.json());
+        logToConsole(`User: ${data.user}`);
+    },
+
+    dashboard: () => {
+        window.open('/monitoring', '_blank');
+        logToConsole('Dashboard opened in new tab.');
     },
 };
 

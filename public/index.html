@@ -5,33 +5,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>System Monitoring Dashboard</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <div class="dashboard">
-        <h1>System Monitoring Dashboard</h1>
-        <button id="theme-toggle" aria-label="Toggle Theme">
-            <span id="theme-icon">🌙</span>
-        </button>
-        <div class="chart-container">
-            <div class="chart-box">
+        <header class="dashboard-header">
+            <h1>SYSTEM MONITOR</h1>
+            <button id="theme-toggle" aria-label="Toggle Theme">
+                <i class="fas fa-moon" id="theme-icon"></i>
+            </button>
+        </header>
+        
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <div class="metric-info">
+                    <span class="metric-label">CPU</span>
+                    <span class="metric-value" id="cpu-value">18.47%</span>
+                </div>
                 <canvas class="chart" id="cpu-chart"></canvas>
-                <div class="chart-value" id="cpu-value">CPU: 0%</div>
             </div>
-            <div class="chart-box">
+            
+            <div class="metric-card">
+                <div class="metric-info">
+                    <span class="metric-label">MEMORY</span>
+                    <span class="metric-value" id="memory-value">64.2%</span>
+                </div>
                 <canvas class="chart" id="memory-chart"></canvas>
-                <div class="chart-value" id="memory-value">RAM: 0%</div>
             </div>
-            <div class="chart-box">
+            
+            <div class="metric-card">
+                <div class="metric-info">
+                    <span class="metric-label">PING</span>
+                    <span class="metric-value" id="ping-value">24ms</span>
+                </div>
                 <canvas class="chart" id="ping-chart"></canvas>
-                <div class="chart-value" id="ping-value">Ping: 0 ms</div>
             </div>
         </div>
-        <div class="console-container">
+        
+        <div class="console-panel">
             <div class="console-output" id="console-output"></div>
-            <input type="text" class="console-input" id="console-input" placeholder="Enter command...">
+            <div class="console-input-container">
+                <span class="prompt">$</span>
+                <input type="text" class="console-input" id="console-input" placeholder="Enter command...">
+            </div>
         </div>
     </div>
+    
     <script src="/socket.io/socket.io.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="script.js"></script>

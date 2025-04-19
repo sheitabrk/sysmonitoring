@@ -56,6 +56,33 @@ class MonitoringDashboard {
             const tryapi = "Try /api/ping"
             res.json({ tryapi });
         });
+
+        this.app.get('/api/uptime', async (req, res) => {
+            const time = await si.time();
+            const uptime = `${(time.uptime / 60).toFixed(1)} minutes`;
+            res.json({ uptime });
+        });
+        
+        this.app.get('/api/cputemp', async (req, res) => {
+            si.cpuTemperature().then(data => res.json({ temp: data.main.toFixed(2) }))
+                .catch(err => res.status(500).json({ error: 'Unable to retrieve CPU temperature (Maybe you are on battery pc?)' }));
+        });
+        
+        this.app.get('/api/hostname', async (req, res) => {
+            const system = await si.osInfo();
+            res.json({ hostname: system.hostname });
+        });
+        
+        this.app.get('/api/platform', async (req, res) => {
+            const system = await si.osInfo();
+            res.json({ platform: `${system.platform} (${system.arch})` });
+        });
+        
+        this.app.get('/api/user', async (req, res) => {
+            const user = await si.users();
+            res.json({ user: user[0]?.user || 'Unknown' });
+        });
+        
     }
 
     setupSocket() {
@@ -67,6 +94,7 @@ class MonitoringDashboard {
                 if (this.showCpuLoad) data.cpuLoad = await this.getCpuLoad();
                 if (this.showMemoryUsage) data.memoryUsage = await this.getMemoryUsage();
                 if (this.showPing) data.ping = await this.getPing();
+                if (this.showCpuTemp) data.cputemp = await this.getCpuTemp();
 
                 socket.emit('stats', data);
             }, this.refreshInterval);
@@ -76,6 +104,11 @@ class MonitoringDashboard {
     async getCpuLoad() {
         const cpu = await si.currentLoad();
         return cpu.currentLoad.toFixed(2);
+    }
+
+    async getCpuTemp() {
+        const cputemp = await si.cpuTemperature();
+        return cputemp.main.toFixed(2);
     }
 
     async getMemoryUsage() {
